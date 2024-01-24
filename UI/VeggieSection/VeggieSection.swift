@@ -32,20 +32,20 @@ struct SectionView: View{
         ZStack{
             VStack{
                 Text(section)
-                    .font(Font.custom("Andale Mono", size: 27))
+                    .font(customMontFont(size: 24))
                     .foregroundColor(fontColor)
                     .padding([.bottom],20)
                     .frame(minWidth: 0,maxWidth: .infinity,alignment: .leading)
                 HStack{
                     VStack{
-                        VeggieButton(veggieName: list[0])
+                        VeggieButton(veggieName: list[0],section: section)
                             .padding([.bottom],10)
-                        VeggieButton(veggieName: list[1])
+                        VeggieButton(veggieName: list[1],section: section)
                             
                         
                     }
                     if list.count==3{
-                        VeggieButton(veggieName: list[2])
+                        VeggieButton(veggieName: list[2],section: section)
                             .padding([.leading],10)
                         
                     }

@@ -5,47 +5,46 @@
 //  Created by Archit Anant on 16/01/24.
 //
 import SwiftUI
-import AVKit
-
-//class SoundManager{
-//    
-//    static let instance = SoundManager()
-//    
-//    var player: AVAudioPlayer?
-//    
-//    enum soundOptions: String{
-//        case CarrotG
-//        case drumbeat
-//    }
-//    
-//    func playAudio(sound : soundOptions){
-//        guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: ".mp3") else {return}
-//        
-//        do{
-//            player = try AVAudioPlayer(contentsOf: url)
-//            player?.play()
-//        }catch  _{
-//            print("Kuch to hua bhai!")
-//        }
-//    }
-//}
-
-
-
 
 struct SingleItem : View{
     var baseIcon:String
     var baseIntstument:String
     var body:some View{
         Button(action: {
+            switch baseIntstument{
+            case "Guitar":
+                if BaseSoundManager.instance.currAudio().contains("guitar") {
+                    BaseSoundManager.instance.killAudio()
+                }
+                else {
+                    BaseSoundManager.instance.playAudio(sound: .guitarbase)
+                }
+            case "Drum":
+                if BaseSoundManager.instance.currAudio().contains("drumbeat") {
+                    BaseSoundManager.instance.killAudio()
+                }
+                else {
+                    BaseSoundManager.instance.playAudio(sound: .drumbeat)
+                }
+            case "Piano":
+                if BaseSoundManager.instance.currAudio().contains("piano") {
+                    BaseSoundManager.instance.killAudio()
+                }
+                else {
+                    BaseSoundManager.instance.playAudio(sound: .pianobase)
+                }
+            default:
+                print("Just a base button!")
+            }
+            print()
             
         }){
             HStack{
                 Text(baseIcon)
-                    .font(Font.custom("Andale Mono", size: 35))
+                    .font(customMontFont(size: 35))
                     .padding([.trailing],7)
                 Text(baseIntstument)
-                    .font(Font.custom("Andale Mono", size: 20))
+                    .font(customMontFont(size: 20))
                     .foregroundColor(BaseButtonColor)
                 
             }

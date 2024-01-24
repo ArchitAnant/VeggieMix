@@ -7,32 +7,6 @@
 
 import SwiftUI
 
-import AVKit
-
-//class SoundManager{
-//    
-////    static let instance = SoundManager()
-//    
-//    var player: AVAudioPlayer?
-//    
-//    enum soundOptions: String{
-//        case CarrotG
-//        case drumbeat
-//    }
-//    
-//    func playAudio(sound : soundOptions){
-//        guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: ".mp3") else {return}
-//        
-//        do{
-//            player = try AVAudioPlayer(contentsOf: url)
-//            player?.play()
-//        }catch  _{
-//            print("Kuch to hua bhai!")
-//        }
-//    }
-//}
-
-
 struct BasePallet: View {
 
     var body: some View {
@@ -42,7 +16,7 @@ struct BasePallet: View {
                     HStack{
                         Text("Let's")
                             .foregroundStyle(Color(red: 0.58, green: 0.74, blue: 0.93))
-                            .font(customMonoFont(size: 30))
+                            .font(customMontFont(size: 30))
                         
                         Image("hold")
                             .offset(y:-3)
@@ -58,7 +32,7 @@ struct BasePallet: View {
             ZStack{
                 VStack{
                     Text("Base:")
-                        .font(Font.custom("Andale Mono", size: 27))
+                        .font(customMontFont(size: 25))
                         .foregroundColor(fontColor)
                         .padding([.bottom],20)
                         .frame(minWidth: 0,maxWidth: .infinity,alignment: .leading)
