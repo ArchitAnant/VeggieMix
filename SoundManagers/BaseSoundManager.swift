@@ -11,7 +11,7 @@ class BaseSoundManager{
 
     static let instance = BaseSoundManager()
 
-    private var player: AVAudioPlayer?
+     var player: AVAudioPlayer?
 
     enum soundOptions: String{
         case drumbeat
@@ -34,6 +34,12 @@ class BaseSoundManager{
         
     }
     func currAudio()->String{
-        return player?.url?.absoluteString ?? ""
+        if ((player?.isPlaying) != false) {
+            return player?.url?.absoluteString ?? ""
+        }
+        else{
+            return ""
+        }
+        
     }
 }

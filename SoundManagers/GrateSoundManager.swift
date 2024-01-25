@@ -33,7 +33,13 @@ class GrateSoundManager{
         
     }
     func currAudio()->String{
-        return player?.url?.absoluteString ?? ""
+        if ((player?.isPlaying) != false) {
+            return player?.url?.absoluteString ?? ""
+        }
+        else{
+            return ""
+        }
+        
     }
 }
 

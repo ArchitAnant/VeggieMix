@@ -19,8 +19,8 @@ let package = Package(
             bundleIdentifier: "com.architanant.sdc.VeggieMix",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .leaf),
-            accentColor: .presetColor(.indigo),
+            appIcon: .placeholder(icon: .carrot),
+            accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [
                 .pad,
                 .phone

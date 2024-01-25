@@ -9,15 +9,20 @@ import SwiftUI
 struct SingleItem : View{
     var baseIcon:String
     var baseIntstument:String
+    
+    @State var buttonPressed = false
+    @State var buttonColor = BaseColor
     var body:some View{
         Button(action: {
             switch baseIntstument{
             case "Guitar":
                 if BaseSoundManager.instance.currAudio().contains("guitar") {
                     BaseSoundManager.instance.killAudio()
+                    
                 }
                 else {
                     BaseSoundManager.instance.playAudio(sound: .guitarbase)
+                
                 }
             case "Drum":
                 if BaseSoundManager.instance.currAudio().contains("drumbeat") {
@@ -36,8 +41,13 @@ struct SingleItem : View{
             default:
                 print("Just a base button!")
             }
-            print()
-            
+            buttonPressed.toggle()
+            if buttonPressed {
+                 buttonColor = BasePalletColor
+            }
+            else{
+                buttonColor = BaseColor
+            }
         }){
             HStack{
                 Text(baseIcon)
@@ -52,13 +62,15 @@ struct SingleItem : View{
             
         }
         .background(
-            BaseColor
+            buttonColor
         )
         .clipShape(
             RoundedRectangle(cornerRadius: 22)
         )
         
+        
     }
+        
 }
 
 #Preview {

@@ -1,9 +1,10 @@
 import SwiftUI
 
 
-struct ContentView: View {
-    
+struct HomeScreenView: View {
+    @State var showStartup = true
     var body: some View {
+        
         ZStack{
             backgroundVec()
             HStack(alignment:.bottom){
@@ -21,6 +22,11 @@ struct ContentView: View {
                minHeight: 0,
                maxHeight: .infinity)
         .background(BaseColor)
+        .sheet(isPresented: $showStartup, content: {
+            IntroSheet(){
+                showStartup.toggle()
+            }
+        })
     }
 }
 
@@ -44,5 +50,5 @@ struct backgroundVec : View{
 }
 
 #Preview {
-    ContentView()
+    HomeScreenView()
 }
