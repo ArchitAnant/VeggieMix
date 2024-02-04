@@ -2,53 +2,42 @@
 //  SwiftUIView.swift
 //  
 //
-//  Created by Archit Anant on 26/01/24.
+//  Created by Archit Anant on 03/02/24.
 //
 
 import SwiftUI
 
-struct IntroSheet: View {
-    var onSkip:()->Void
-    var onNext:()->Void
-    @State var showMusic = false
-    
+struct MusicSheet: View {
+    var playMusic:()->Void
     var body: some View {
         VStack(){
             VStack(alignment:.leading){
-                Button(action: {onSkip()}){
-                    Text("Skip")
-                        .foregroundStyle(fontColor)
-                }
-                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .trailing)
-                .padding()
-                Text("Hi, This is VeggieMix!")
+                Spacer()
+                    .frame(height: 55)
+                Text("Lets, Try Some Classic!")
                     .font(customMontFont(size: 26))
                     .foregroundStyle(fontColor)
                     .padding([.bottom],5)
-                Text("Vegetables make quite different types of sound! 🎧\nHave you ever thought of making music out of them!? 🎵")
+                Text("Lets, try this to play a classic Michael Jackson song 🪩\nLet me show you how!")
                     .font(customMontFont(size: 21))
                     .foregroundStyle(fontColor)
                     .padding([.top,.bottom])
-                Text("Lets Do It!  🎤")
+                Text("Lets Play!  🎤")
                     .font(customMontFont(size: 26))
                     .foregroundStyle(fontColor)
                     .padding([.top],5)
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .leading)
                 Button(action: {
-                    showMusic=true
+                    playMusic()
                 }){
                     Text("Next")
                         .foregroundStyle(fontColor)
                 }
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .trailing)
                 .padding([.leading,.top,.trailing])
-                .sheet(isPresented:$showMusic, content: {
-                    MusicSheet(playMusic: {onSkip()})
-                })
             }
             .padding(30)
-
-            Image("veggieVec")
+            Image("soundVec")
                 .resizable()
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .bottom)
                 
@@ -60,9 +49,9 @@ struct IntroSheet: View {
         
         .background(BaseColor)
     }
-        
+    
 }
 
 #Preview {
-    IntroSheet(onSkip: {}, onNext: {})
+    MusicSheet(){}
 }

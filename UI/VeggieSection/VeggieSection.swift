@@ -8,17 +8,26 @@
 import SwiftUI
 
 struct VeggieSection: View {
+    var genPulse:()->Void
     var body: some View {
         VStack {
             HStack{
-                SectionView(width: 300,section: "Biting :", list: ["Apple","Carrot","Slime"])
-                SectionView(width:138,section: "Grating :",list: ["Carrot","Pepper"])
+                SectionView(width: 300,section: "Biting :", list: ["Apple","Carrot","Slime"]){
+                    genPulse()
+                }
+                SectionView(width:138,section: "Grating :",list: ["Carrot","Pepper"]){
+                    genPulse()
+                }
             }
             .padding([.bottom],10)
             
             HStack{
-                SectionView(width : 300,section: "Stab :", list: ["Cabbage","Carrot","Celery"])
-                SectionView(width : 138,section: "Hit :",list: ["Sweet\nPotato","Pemelo"])
+                SectionView(width : 300,section: "Stab :", list: ["Cabbage","Carrot","Celery"]){
+                    genPulse()
+                }
+                SectionView(width : 138,section: "Hit :",list: ["Sweet\nPotato","Pemelo"]){
+                    genPulse()
+                }
             }
         }
     }
@@ -28,6 +37,7 @@ struct SectionView: View{
     var width : CGFloat
     var section :String
     var list : [String]
+    var genPulse:()->Void
     var body: some View{
         ZStack{
             VStack{
@@ -38,15 +48,23 @@ struct SectionView: View{
                     .frame(minWidth: 0,maxWidth: .infinity,alignment: .leading)
                 HStack{
                     VStack{
-                        VeggieButton(veggieName: list[0],section: section)
+                        VeggieButton(veggieName: list[0],section: section){
+                            genPulse()
+                        }
                             .padding([.bottom],10)
                         VeggieButton(veggieName: list[1],section: section)
+                             {
+                                genPulse()
+                            }
                             
                         
                     }
                     if list.count==3{
-                        VeggieButton(veggieName: list[2],section: section)
+                        VeggieButton(veggieName: list[2],section: section){
+                            genPulse()
+                        }
                             .padding([.leading],10)
+                             
                         
                     }
                 }
@@ -64,5 +82,7 @@ struct SectionView: View{
 }
 
 #Preview {
-    VeggieSection()
+    VeggieSection(){
+        
+    }
 }

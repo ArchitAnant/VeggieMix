@@ -3,12 +3,19 @@ import SwiftUI
 
 struct HomeScreenView: View {
     @State var showStartup = true
+    @State var sheetCode = 0
+    @State var isPulse = false
     var body: some View {
         
         ZStack{
             backgroundVec()
+//            SinglePulse()
+                .offset(y: -280)
             HStack(alignment:.bottom){
-                VeggieSection()
+                VeggieSection(){
+                    isPulse.toggle()
+                    print("Generate Pulse")
+                }
                 BasePallet()
             }
             .frame(minHeight: 0,
@@ -22,11 +29,15 @@ struct HomeScreenView: View {
                minHeight: 0,
                maxHeight: .infinity)
         .background(BaseColor)
-        .sheet(isPresented: $showStartup, content: {
-            IntroSheet(){
-                showStartup.toggle()
-            }
-        })
+//        .sheet(isPresented: $showStartup, content: {
+//                IntroSheet(onSkip:{
+//                    showStartup.toggle()
+//                },onNext: {
+//                    sheetCode+=1
+//                    print(sheetCode)
+//                })
+//            
+//        })
     }
 }
 

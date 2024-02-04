@@ -10,8 +10,10 @@ import SwiftUI
 struct VeggieButton: View {
     var veggieName : String
     var section:String
+    var genPulse:()->Void
     var body: some View {
         Button(action: {
+            genPulse()
             switch "\(veggieName.lowercased())-\(section.lowercased())"{
             case "sweet\npotato-hit :":
                 if HitSoundManager.instance.currAudio().contains("sweet") {
@@ -105,5 +107,7 @@ struct VeggieButton: View {
 }
 
 #Preview {
-    VeggieButton(veggieName: "Apple",section: "temp")
+    VeggieButton(veggieName: "Apple",section: "temp"){
+        
+    }
 }
