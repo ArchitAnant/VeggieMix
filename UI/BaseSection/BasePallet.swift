@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BasePallet: View {
-
+    @StateObject var vm = ViewModel()
     var body: some View {
         VStack{
             HStack{
@@ -37,18 +37,44 @@ struct BasePallet: View {
                         .padding([.bottom],20)
                         .frame(minWidth: 0,maxWidth: .infinity,alignment: .leading)
                     HStack{
-                        SingleItem(baseIcon: "🎸", baseIntstument: "Guitar")
+                        SingleItem(baseIcon: "🎸", baseIntstument: "Guitar"){
+                            vm.playGuitarMusic()
+                        }
                             .padding([.trailing],10)
+                            .background(
+                                vm.guitarColor
+                            )
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 22)
+                            )
                         SingleItem(baseIcon: "🎹", baseIntstument: "Piano")
+                        {
+                            vm.playPianoMusic()
+                        }
                             .padding([.trailing],10)
+                            .background(
+                                vm.pianoColor
+                            )
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 22)
+                            )
                         
                     }
                     HStack{
-                        SingleItem(baseIcon: "🥁", baseIntstument: "Drum")
+                        SingleItem(baseIcon: "🥁", baseIntstument: "Drum"){
+                            vm.playDrumMusic()
+                        }
                             .padding([.trailing],10)
-                        SingleItem(baseIcon: "🎻", baseIntstument: "Violin")
-                            .padding([.trailing],10)
-                        
+                            .background(
+                                vm.drumColor
+                            )
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 22)
+                            )
+                        stopAll(){
+                            vm.stopButton()
+                        }
+//                            .padding([.trailing],10)
                     }
                 }
             }

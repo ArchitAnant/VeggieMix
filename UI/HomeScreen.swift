@@ -9,8 +9,8 @@ struct HomeScreenView: View {
         
         ZStack{
             backgroundVec()
-//            SinglePulse()
-                .offset(y: -280)
+
+                
             HStack(alignment:.bottom){
                 VeggieSection(){
                     isPulse.toggle()
@@ -29,15 +29,15 @@ struct HomeScreenView: View {
                minHeight: 0,
                maxHeight: .infinity)
         .background(BaseColor)
-//        .sheet(isPresented: $showStartup, content: {
-//                IntroSheet(onSkip:{
-//                    showStartup.toggle()
-//                },onNext: {
-//                    sheetCode+=1
-//                    print(sheetCode)
-//                })
-//            
-//        })
+        .sheet(isPresented: $showStartup, content: {
+                IntroSheet(onSkip:{
+                    showStartup.toggle()
+                },onNext: {
+                    sheetCode+=1
+                    print(sheetCode)
+                })
+            
+        })
     }
 }
 

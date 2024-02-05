@@ -14,7 +14,7 @@ struct AudioVisualiser: View {
 //            BasePulse(isPulse: {
 //                print("$isPulse")
 //                return isPulse ? true : false
-//            })
+//            })j
             
             Button(action: {
                 isPulse.toggle()
@@ -91,23 +91,23 @@ struct BasePulse: View {
                 .foregroundColor(fontColor)
                 .frame(width: 100 )
                 .scaleEffect(isPulse ? 1.5 : 1)
-                .animation(.easeInOut.speed(0.5).repeatCount(5,autoreverses: true), value: isPulse)
+                .animation(.easeInOut.speed(0.5).repeatCount(1,autoreverses: true), value: isPulse)
             Circle()
                 .stroke(fontColor,lineWidth:3)
                 .frame(width: isPulse ? 320 : 200)
                 .opacity(isPulse ? 0.2 : 1)
 
-                .animation(.easeInOut.speed(0.6).repeatCount(5,autoreverses: true), value: isPulse)
+                .animation(.easeInOut.speed(0.6).repeatCount(1,autoreverses: true), value: isPulse)
             Circle()
                 .stroke(fontColor,lineWidth:3)
                 .frame(width: isPulse ? 650 : 150)
                 .opacity(isPulse ? -0.5 : 1)
-                .animation(.easeInOut.speed(0.6).repeatCount(5,autoreverses: true), value: isPulse
+                .animation(.easeInOut.speed(0.6).repeatCount(1,autoreverses: true), value: isPulse
                 )
             Button(action: {
                 isPulse.toggle()
                 print(isPulse)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     isPulse.toggle()
                 }
             }){
@@ -118,8 +118,10 @@ struct BasePulse: View {
     }
 }
 
+// smooth combinations - delay - 3 rep - 5
+//                               0.3     1
+
 #Preview {
-//    SinglePulse(isPulse: false)
     BasePulse()
 }
 

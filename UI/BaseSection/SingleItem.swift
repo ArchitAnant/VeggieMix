@@ -9,45 +9,15 @@ import SwiftUI
 struct SingleItem : View{
     var baseIcon:String
     var baseIntstument:String
+    var onclick:()->Void
     
     @State var buttonPressed = false
-    @State var buttonColor = BaseColor
+//    @State var buttonColor = BaseColor
+    
+    
     var body:some View{
         Button(action: {
-            switch baseIntstument{
-            case "Guitar":
-                if BaseSoundManager.instance.currAudio().contains("guitar") {
-                    BaseSoundManager.instance.killAudio()
-                    
-                }
-                else {
-                    BaseSoundManager.instance.playAudio(sound: .guitarbase)
-                
-                }
-            case "Drum":
-                if BaseSoundManager.instance.currAudio().contains("drumbeat") {
-                    BaseSoundManager.instance.killAudio()
-                }
-                else {
-                    BaseSoundManager.instance.playAudio(sound: .drumbeat)
-                }
-            case "Piano":
-                if BaseSoundManager.instance.currAudio().contains("piano") {
-                    BaseSoundManager.instance.killAudio()
-                }
-                else {
-                    BaseSoundManager.instance.playAudio(sound: .pianobase)
-                }
-            default:
-                print("Just a base button!")
-            }
-            buttonPressed.toggle()
-            if buttonPressed {
-                 buttonColor = BasePalletColor
-            }
-            else{
-                buttonColor = BaseColor
-            }
+            onclick()
         }){
             HStack{
                 Text(baseIcon)
@@ -55,24 +25,47 @@ struct SingleItem : View{
                     .padding([.trailing],7)
                 Text(baseIntstument)
                     .font(customMontFont(size: 20))
-                    .foregroundColor(BaseButtonColor)
+                    .foregroundColor(fontColor)
                 
             }
             .frame(width: 196.56088, height: 87)
             
         }
-        .background(
-            buttonColor
-        )
-        .clipShape(
-            RoundedRectangle(cornerRadius: 22)
-        )
-        
-        
     }
         
 }
 
+
+struct stopAll: View {
+    var onClick:()->Void
+    var body: some View {
+        Button(action: {
+            onClick()
+        }){
+            HStack{
+                Image(systemName: "stop.fill")
+                    .foregroundStyle(fontColor)
+                    .padding([.trailing],7)
+                Text("Stop All!")
+                    .font(customMontFont(size: 20))
+                    .foregroundColor(fontColor)
+                
+            }
+            .frame(width: 196.56088, height: 87)
+            
+        }
+    .background(
+        BaseButtonColor
+    )
+    .clipShape(
+        RoundedRectangle(cornerRadius: 22)
+    )
+    }
+}
+
+
 #Preview {
-    SingleItem(baseIcon: "🎸", baseIntstument: "Guitar")
+    SingleItem(baseIcon: "🎸", baseIntstument: "Guitar"){
+        
+    }
 }
