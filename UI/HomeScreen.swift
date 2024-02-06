@@ -41,14 +41,22 @@ struct HomeScreenView: View {
                         .foregroundColor(fontColor)
                         .frame(width: 500 , height: 2)
                 }
+                .opacity(showOvelay ? 0.3 : 1)
+                    .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
                 
                 backgroundVec()
+                    .brightness(showOvelay ? -1 : 0)
+                    .animation(.easeInOut, value: showOvelay)
                 HStack(alignment:.bottom){
                     VeggieSection(){
                         isPulse = true
                         startVeggieTimer()
                     }
-                    BasePallet()
+                    ZStack{
+                        BasePallet()
+                            .opacity(showOvelay ? 0.3 : 1)
+                            .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
+                    }
                 }
                 .frame(minHeight: 0,
                        maxHeight: .infinity,
@@ -62,49 +70,46 @@ struct HomeScreenView: View {
                    minHeight: 0,
                    maxHeight: .infinity)
             .background(BaseColor)
-            .overlay(content: {
-                if showOvelay{
-                    Rectangle()
-                        .opacity(0.4)
-                        .ignoresSafeArea()
-                }
-            })
-                    .sheet(isPresented: $showStartup, content: {
-                            IntroSheet(onSkip:{
-                                showStartup.toggle()
-                            },onNext: {
-                                sheetCode+=1
-                                print(sheetCode)
-                            },letsRock: {
-                                showOvelay = true
-                            })
-            
-                    })
-            HStack{
+            .sheet(isPresented: $showStartup, content: {
+                    IntroSheet(onSkip:{
+                        showStartup.toggle()
+                        },onNext: {
+                            sheetCode+=1
+                            print(sheetCode)
+                        },letsRock: {
+                            showOvelay = true
+                        })
+          })
+            VStack{
                 Button(action :{
                     showOvelay.toggle()
                 }){
                     Image(systemName: "book")
                         .font(.title)
                         .foregroundColor(fontColor)
-                        
-                        .padding([.trailing],30)
+                        .frame(alignment: .trailing)
+                        .padding([.trailing],showOvelay ? 0 : 30)
                         .padding([.top],10)
+                }
+                .animation(.spring, value: showOvelay)
+                if showOvelay{
+                    Demo()
+
+                        .frame(width: UIScreen.main.bounds.width/2.13)
+                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+                        .padding()
+                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
                 }
             }
             .frame(maxWidth: .infinity,maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .topTrailing)
         }
     }
     private func startVeggieTimer() {
-        // carrot - delay = 5, repeatCount = 11
-        // pepper - delay = 1, repeatCount = 3
-        // restSmall - delay = 0.3, repeatCount = 1
-        
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             elapsedTime += 1
             if elapsedTime >= 0.3 {
-                timer.invalidate() // Stop the timer
+                timer.invalidate()
                 isPulse = false
             }
         }

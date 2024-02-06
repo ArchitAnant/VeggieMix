@@ -15,6 +15,8 @@ let BasePalletColor = Color(red: 0.054901960784313725, green: 0.1411764705882353
 
 let fontColor = Color(red: 0.37254901960784315, green: 0.5215686274509804, blue: 0.6941176470588235)
 
+let overlayColor = Color(red: 0.027450980392156862, green: 0.054901960784313725, blue: 0.09019607843137255)
+
 func customMontFont(size:CGFloat) ->Font{
     
     let cfURL = Bundle.main.url(forResource: "MontserratAlternates-Medium", withExtension: "ttf")! as CFURL
