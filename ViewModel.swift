@@ -12,6 +12,8 @@ class ViewModel: ObservableObject {
     @Published var pianoColor:Color = BaseColor
     @Published var guitarColor:Color = BaseColor
     
+    @State private var elapsedTime: TimeInterval = 0
+    
     func playGuitarMusic(){
         if BaseSoundManager.instance.currAudio().contains("guitar") {
             BaseSoundManager.instance.killAudio()

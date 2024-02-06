@@ -35,14 +35,14 @@ struct VeggieButton: View {
                     GrateSoundManager.instance.killAudio()
                 }
                 else {
-                    GrateSoundManager.instance.playAudio(sound: .carrotgrate)
+                    GrateSoundManager.instance.playAudio(sound: .gratecarrot)
                 }
             case "pepper-grating :":
                 if GrateSoundManager.instance.currAudio().contains("pepper") {
                     GrateSoundManager.instance.killAudio()
                 }
                 else {
-                    GrateSoundManager.instance.playAudio(sound: .peppergrate)
+                    GrateSoundManager.instance.playAudio(sound: .gratepepper)
                 }
             case "apple-biting :":
                 if BiteSoundManager.instance.currAudio().contains("apple") {

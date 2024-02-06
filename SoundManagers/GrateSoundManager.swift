@@ -14,8 +14,8 @@ class GrateSoundManager{
     private var player: AVAudioPlayer?
 
     enum soundOptions: String{
-        case carrotgrate
-        case peppergrate
+        case gratecarrot
+        case gratepepper
     }
 
     func playAudio(sound : soundOptions){

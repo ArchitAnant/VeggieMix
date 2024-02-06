@@ -10,6 +10,7 @@ import SwiftUI
 struct IntroSheet: View {
     var onSkip:()->Void
     var onNext:()->Void
+    var letsRock:()->Void
     @State var showMusic = false
     
     var body: some View {
@@ -43,7 +44,10 @@ struct IntroSheet: View {
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .trailing)
                 .padding([.leading,.top,.trailing])
                 .sheet(isPresented:$showMusic, content: {
-                    MusicSheet(playMusic: {onSkip()})
+                    MusicSheet(playMusic: {
+                        letsRock()
+                        onSkip()
+                    })
                 })
             }
             .padding(30)
@@ -64,5 +68,5 @@ struct IntroSheet: View {
 }
 
 #Preview {
-    IntroSheet(onSkip: {}, onNext: {})
+    IntroSheet(onSkip: {}, onNext: {},letsRock: {})
 }

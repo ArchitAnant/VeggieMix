@@ -23,6 +23,3 @@ struct Demo: View {
     }
 }
 
-#Preview {
-    SwiftUIView()
-}

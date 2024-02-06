@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BasePallet: View {
+    
     @StateObject var vm = ViewModel()
     var body: some View {
         VStack{
@@ -39,6 +40,7 @@ struct BasePallet: View {
                     HStack{
                         SingleItem(baseIcon: "🎸", baseIntstument: "Guitar"){
                             vm.playGuitarMusic()
+                            
                         }
                             .padding([.trailing],10)
                             .background(
@@ -50,6 +52,7 @@ struct BasePallet: View {
                         SingleItem(baseIcon: "🎹", baseIntstument: "Piano")
                         {
                             vm.playPianoMusic()
+                            
                         }
                             .padding([.trailing],10)
                             .background(
@@ -63,6 +66,7 @@ struct BasePallet: View {
                     HStack{
                         SingleItem(baseIcon: "🥁", baseIntstument: "Drum"){
                             vm.playDrumMusic()
+                            
                         }
                             .padding([.trailing],10)
                             .background(
