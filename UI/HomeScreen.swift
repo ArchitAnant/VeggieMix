@@ -2,11 +2,12 @@ import SwiftUI
 
 
 struct HomeScreenView: View {
+    @StateObject var vm = ViewModel()
     @State private var elapsedTime: TimeInterval = 0
     @State var showStartup = true
     @State var sheetCode = 0
     @State var isPulse = false
-    @State var showOvelay = false
+    @State var showOvelay = true
     
     var body: some View {
         ZStack{
@@ -48,15 +49,17 @@ struct HomeScreenView: View {
                     .brightness(showOvelay ? -1 : 0)
                     .animation(.easeInOut, value: showOvelay)
                 HStack(alignment:.bottom){
-                    VeggieSection(){
+                    VeggieSection(vm : vm){
+                        vm.highPomelo()
                         isPulse = true
                         startVeggieTimer()
+                        
                     }
-                    ZStack{
-                        BasePallet()
-                            .opacity(showOvelay ? 0.3 : 1)
-                            .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
-                    }
+                    
+                    BasePallet()
+                        .opacity(showOvelay ? 0.3 : 1)
+                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
+                    
                 }
                 .frame(minHeight: 0,
                        maxHeight: .infinity,
@@ -70,19 +73,20 @@ struct HomeScreenView: View {
                    minHeight: 0,
                    maxHeight: .infinity)
             .background(BaseColor)
-            .sheet(isPresented: $showStartup, content: {
-                    IntroSheet(onSkip:{
-                        showStartup.toggle()
-                        },onNext: {
-                            sheetCode+=1
-                            print(sheetCode)
-                        },letsRock: {
-                            showOvelay = true
-                        })
-          })
+//            .sheet(isPresented: $showStartup, content: {
+//                    IntroSheet(onSkip:{
+//                        showStartup.toggle()
+//                        },onNext: {
+//                            sheetCode+=1
+//                            print(sheetCode)
+//                        },letsRock: {
+//                            showOvelay = true
+//                        })
+//          })
             VStack{
                 Button(action :{
                     showOvelay.toggle()
+                    
                 }){
                     Image(systemName: "book")
                         .font(.title)
@@ -93,8 +97,10 @@ struct HomeScreenView: View {
                 }
                 .animation(.spring, value: showOvelay)
                 if showOvelay{
-                    Demo()
-
+                    Demo(vm : vm)
+//                    {
+////                        vm.highSweetPotato()
+//                    }
                         .frame(width: UIScreen.main.bounds.width/2.13)
                         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
                         .padding()
@@ -105,7 +111,6 @@ struct HomeScreenView: View {
         }
     }
     private func startVeggieTimer() {
-        
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             elapsedTime += 1
             if elapsedTime >= 0.3 {

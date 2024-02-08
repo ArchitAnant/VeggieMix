@@ -12,7 +12,8 @@ class ViewModel: ObservableObject {
     @Published var pianoColor:Color = BaseColor
     @Published var guitarColor:Color = BaseColor
     
-    @State private var elapsedTime: TimeInterval = 0
+    
+    @State private var currentPlayTime: TimeInterval = 0 
     
     func playGuitarMusic(){
         if BaseSoundManager.instance.currAudio().contains("guitar") {
@@ -24,7 +25,9 @@ class ViewModel: ObservableObject {
             guitarColor = BasePalletColor
             drumColor = BaseColor
             pianoColor = BaseColor
+            
         }
+        
     }
     func playDrumMusic(){
         if  BaseSoundManager.instance.currAudio().contains("drumbeat") {
@@ -36,6 +39,7 @@ class ViewModel: ObservableObject {
             guitarColor = BaseColor
             drumColor = BasePalletColor
             pianoColor = BaseColor
+            
         }
     }
     func playPianoMusic(){
@@ -48,6 +52,7 @@ class ViewModel: ObservableObject {
             guitarColor = BaseColor
             drumColor = BaseColor
             pianoColor = BasePalletColor
+            
         }
     }
     func stopButton(){
@@ -62,5 +67,56 @@ class ViewModel: ObservableObject {
         pianoColor = BaseColor
     }
     
+    @Published var highHitSweetPotato : Color = fontColor
+    @Published var highStabCarrot : Color = fontColor
+    @Published var highHitPomelo : Color = fontColor
+    @Published var highGratePepper : Color = fontColor
+    @Published var highStabCabbage : Color = fontColor
+    @Published var playVid  = false
+    
+    func highPepper(){
+        highGratePepper = .cyan
+        highHitPomelo = fontColor
+        highStabCarrot = fontColor
+        highHitSweetPotato = fontColor
+        highStabCabbage = fontColor
+    }
+    func highPomelo(){
+        highGratePepper = fontColor
+        highHitPomelo = .cyan
+        highStabCarrot = fontColor
+        highHitSweetPotato = fontColor
+        highStabCabbage = fontColor
+        
+    }
+    func highCarrot(){
+        highGratePepper = fontColor
+        highHitPomelo = fontColor
+        highStabCarrot = .cyan
+        highHitSweetPotato = fontColor
+        highStabCabbage = fontColor
+    }
+    func highSweetPotato(){
+        highGratePepper = fontColor
+        highHitPomelo = fontColor
+        highStabCarrot = fontColor
+        highHitSweetPotato = .cyan
+        highStabCabbage = fontColor
+    }
+    func highCabbage(){
+        highGratePepper = fontColor
+        highHitPomelo = fontColor
+        highStabCarrot = fontColor
+        highHitSweetPotato = fontColor
+        highStabCabbage = .cyan
+    }
+    func resetAll(){
+        highGratePepper = fontColor
+        highHitPomelo = fontColor
+        highStabCarrot = fontColor
+        highHitSweetPotato = fontColor
+        highStabCabbage = fontColor
+    }
+
 }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 /*
  The sounds used are
  Hit:
@@ -18,20 +19,32 @@ import SwiftUI
     - Pepper
  */
 struct Demo: View {
+    @StateObject var vm : ViewModel
+    @State var onScreen = 0
     var body: some View {
             VStack{
-                
-                Greet()
-//                    .padding(25)
+                if onScreen == 0{
+                    Greet(){
+                        onScreen+=1
+                    }
                     .frame(maxWidth: .infinity,alignment: .leading)
+                }
+                else{
+                    hitIt(vm : vm)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                }
+                    
                 
             }
+            .animation(.easeIn,value: onScreen)
         .padding(25)
         .background(overlayColor)
     }
 }
 
 struct Greet: View {
+    
+    var letsRock:()->Void
     @State var fromGreet = false
     var body: some View {
         Spacer()
@@ -66,34 +79,110 @@ struct Greet: View {
         HStack{
             if fromGreet{
                 Button(action :{
-                    
+                    fromGreet = false
                 }){
-                    Text("Play")
+                    Text("Back")
+                        .font(customMontFont(size: 15))
                         .padding()
                 }
                 .frame(width: 100)
                 .background(BaseButtonColor)
                 .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .leading)
+                
+                Button(action :{
+                    letsRock()
+                }){
+                    Text("Play")
+                        .font(customMontFont(size: 15))
+                        .padding()
+                }
+                .frame(width: 100)
+                .background(BaseButtonColor)
+                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
             }
-            Button(action :{
-                fromGreet = true
-            }){
-                Text("Next")
-                    .padding()
+            else{
+                Button(action :{
+                    fromGreet = true
+                }){
+                    Text("Next")
+                        .font(customMontFont(size: 15))
+                        .padding()
+                }
+                .frame(width: 100)
+                .background(BaseButtonColor)
+                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
             }
-            .frame(width: 100)
-            .background(BaseButtonColor)
-            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
         }
-//        .padding()
         
         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .trailing)
         .animation(.smooth, value: fromGreet)
     }
 }
 
+struct hitIt:View {
+    @StateObject var vm : ViewModel
+    @State private var timer: Timer?
+    @State var counter = 3
+    @State var letsGo = false
+    let player = AVPlayer(url: Bundle.main.url(forResource: "VeggieMixDemo", withExtension: ".mp4")!)
+    
+    
+    var body: some View{
+        VStack {
+            Text("Let's Hit It! 👊🏼")
+                .font(customMontFont(size: 30))
+                .foregroundStyle(fontColor)
+                .onAppear{
+                    starttimer()
+                }
+                .padding()
+                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .leading)
+            
+            
+            Text(counter>0 ? "\(counter)" : "Watch!")
+                .font(customMontFont(size: 55))
+                .foregroundStyle( counter>0 ? fontColor :  BasePalletColor)
+                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+            
+            
+            VideoPlayer(player: player)
+                .frame(maxWidth: .infinity,maxHeight: 290)
+                .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+                .padding([.bottom])
+            
+            Button(action :{
+                
+            }){
+                Text("Try It!")
+                    .font(customMontFont(size: 15))
+                    .padding()
+            }
+            .frame(width: 100)
+            .background(BaseButtonColor)
+            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .trailing)
+            
+        }
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+    }
+    func starttimer(){
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if counter>0 {
+                counter -= 1
+            }
+            else{
+                player.play()
+                timer?.invalidate()
+            }
+        }
+    }
+}
+
+
 #Preview {
-    Demo()
+    Demo(vm : ViewModel())
 }
 

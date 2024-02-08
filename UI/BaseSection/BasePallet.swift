@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct BasePallet: View {
-    
     @StateObject var vm = ViewModel()
     var body: some View {
         VStack{
@@ -40,11 +39,14 @@ struct BasePallet: View {
                     HStack{
                         SingleItem(baseIcon: "🎸", baseIntstument: "Guitar"){
                             vm.playGuitarMusic()
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                                vm.stopButton()
+                            }
                         }
                             .padding([.trailing],10)
                             .background(
                                 vm.guitarColor
+                                
                             )
                             .clipShape(
                                 RoundedRectangle(cornerRadius: 22)
@@ -52,6 +54,9 @@ struct BasePallet: View {
                         SingleItem(baseIcon: "🎹", baseIntstument: "Piano")
                         {
                             vm.playPianoMusic()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                                vm.stopButton()
+                            }
                             
                         }
                             .padding([.trailing],10)
@@ -66,7 +71,9 @@ struct BasePallet: View {
                     HStack{
                         SingleItem(baseIcon: "🥁", baseIntstument: "Drum"){
                             vm.playDrumMusic()
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                                vm.stopButton()
+                            }
                         }
                             .padding([.trailing],10)
                             .background(
@@ -76,7 +83,13 @@ struct BasePallet: View {
                                 RoundedRectangle(cornerRadius: 22)
                             )
                         stopAll(){
+//                            print(vm.highHitPomelo)
+//                            vm.highPomelo()
+//                            print(vm.highHitPomelo)
                             vm.stopButton()
+                            
+                            
+//
                         }
 //                            .padding([.trailing],10)
                     }
@@ -93,6 +106,7 @@ struct BasePallet: View {
     }
     
 }
+
 
 #Preview{
     BasePallet()
