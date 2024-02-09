@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  BasePallet.swift
 //  
 //
 //  Created by Archit Anant on 16/01/24.
@@ -83,15 +83,8 @@ struct BasePallet: View {
                                 RoundedRectangle(cornerRadius: 22)
                             )
                         stopAll(){
-//                            print(vm.highHitPomelo)
-//                            vm.highPomelo()
-//                            print(vm.highHitPomelo)
                             vm.stopButton()
-                            
-                            
-//
                         }
-//                            .padding([.trailing],10)
                     }
                 }
             }

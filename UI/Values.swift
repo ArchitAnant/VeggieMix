@@ -24,5 +24,3 @@ func customMontFont(size:CGFloat) ->Font{
    
     return Font.custom("MontserratAlternates-Medium",size: size)
 }
-
-// MonoFont

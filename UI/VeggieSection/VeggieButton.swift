@@ -1,6 +1,6 @@
 //
-//  SwiftUIView.swift
-//  
+//  VeggieButton.swift
+//
 //
 //  Created by Archit Anant on 18/01/24.
 //
@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct VeggieButton: View {
-    @StateObject var vm : ViewModel
     var veggieName : String
     var section:String
     var genPulse:()->Void
     var body: some View {
         Button(action: {
-            
             genPulse()
             switch "\(veggieName.lowercased())-\(section.lowercased())"{
             case "sweet\npotato-hit :":
@@ -25,14 +23,12 @@ struct VeggieButton: View {
                     HitSoundManager.instance.playAudio(sound: .sweetpotatohit)
                 }
             
-            case "pemelo-hit :":
+            case "pomelo-hit :":
                 if HitSoundManager.instance.currAudio().contains("pemelo") {
                     HitSoundManager.instance.killAudio()
                 }
                 else {
                     HitSoundManager.instance.playAudio(sound: .pomelohit)
-                    
-                    
                 }
             case "carrot-grating :":
                 if GrateSoundManager.instance.currAudio().contains("carrot") {
@@ -99,7 +95,6 @@ struct VeggieButton: View {
                     .font(customMontFont(size: 19))
                     .foregroundColor(fontColor)
                     .frame(width: 135.68636, height: 72)
-                    
         }
         .background(
             BaseColor
@@ -117,7 +112,6 @@ struct VeggieButton: View {
 }
 
 #Preview {
-    VeggieButton(vm : ViewModel(), veggieName: "Apple",section: "temp"){
-        
+    VeggieButton( veggieName: "Apple",section: "temp"){
     }
 }

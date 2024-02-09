@@ -7,7 +7,7 @@ struct HomeScreenView: View {
     @State var showStartup = true
     @State var sheetCode = 0
     @State var isPulse = false
-    @State var showOvelay = true
+    
     
     var body: some View {
         ZStack{
@@ -42,23 +42,21 @@ struct HomeScreenView: View {
                         .foregroundColor(fontColor)
                         .frame(width: 500 , height: 2)
                 }
-                .opacity(showOvelay ? 0.3 : 1)
-                    .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
+                .opacity(vm.showOvelay ? 0.3 : 1)
+                .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: vm.showOvelay)
                 
                 backgroundVec()
-                    .brightness(showOvelay ? -1 : 0)
-                    .animation(.easeInOut, value: showOvelay)
+                    .brightness(vm.showOvelay ? -1 : 0)
+                    .animation(.easeInOut, value: vm.showOvelay)
                 HStack(alignment:.bottom){
                     VeggieSection(vm : vm){
-                        vm.highPomelo()
                         isPulse = true
                         startVeggieTimer()
-                        
                     }
                     
                     BasePallet()
-                        .opacity(showOvelay ? 0.3 : 1)
-                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
+                        .opacity(vm.showOvelay ? 0.3 : 1)
+                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: vm.showOvelay)
                     
                 }
                 .frame(minHeight: 0,
@@ -73,38 +71,38 @@ struct HomeScreenView: View {
                    minHeight: 0,
                    maxHeight: .infinity)
             .background(BaseColor)
-//            .sheet(isPresented: $showStartup, content: {
-//                    IntroSheet(onSkip:{
-//                        showStartup.toggle()
-//                        },onNext: {
-//                            sheetCode+=1
-//                            print(sheetCode)
-//                        },letsRock: {
-//                            showOvelay = true
-//                        })
-//          })
+            .sheet(isPresented: $showStartup, content: {
+                    IntroSheet(onSkip:{
+                        showStartup.toggle()
+                        },onNext: {
+                            sheetCode+=1
+                            print(sheetCode)
+                        },letsRock: {
+                            vm.showOvelay = true
+                        })
+          })
             VStack{
                 Button(action :{
-                    showOvelay.toggle()
+                    vm.showOvelay.toggle()
+                    if !vm.showOvelay{
+                        vm.resetAll()
+                    }
                     
                 }){
                     Image(systemName: "book")
                         .font(.title)
                         .foregroundColor(fontColor)
                         .frame(alignment: .trailing)
-                        .padding([.trailing],showOvelay ? 0 : 30)
+                        .padding([.trailing],vm.showOvelay ? 0 : 30)
                         .padding([.top],10)
                 }
-                .animation(.spring, value: showOvelay)
-                if showOvelay{
+                .animation(.spring, value: vm.showOvelay)
+                if vm.showOvelay{
                     Demo(vm : vm)
-//                    {
-////                        vm.highSweetPotato()
-//                    }
                         .frame(width: UIScreen.main.bounds.width/2.13)
                         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
                         .padding()
-                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: showOvelay)
+                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: vm.showOvelay)
                 }
             }
             .frame(maxWidth: .infinity,maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,alignment: .topTrailing)

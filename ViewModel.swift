@@ -1,6 +1,6 @@
 //
 //  ViewModel.swift
-//  VeggieMix
+//  
 //
 //  Created by Archit Anant on 05/02/24.
 //
@@ -11,7 +11,7 @@ class ViewModel: ObservableObject {
     @Published var drumColor:Color = BaseColor
     @Published var pianoColor:Color = BaseColor
     @Published var guitarColor:Color = BaseColor
-    
+    @Published var showOvelay = false
     
     @State private var currentPlayTime: TimeInterval = 0 
     
@@ -73,6 +73,27 @@ class ViewModel: ObservableObject {
     @Published var highGratePepper : Color = fontColor
     @Published var highStabCabbage : Color = fontColor
     @Published var playVid  = false
+    @Published var tutorialArray = [
+                                    "Hit\nSweet Potato",
+                                    "Stab\nCarrot",
+                                    "Hit\nSweet Potato",
+                                    "Stab\nCarrot",
+                                    "Hit\nSweet Potato",
+                                    "Stab\nCarrot",
+                                    "Hit\nPomelo",
+                                    "Hit\nSweet Potato",
+                                    "Stab\nCarrot",
+                                    "Hit\nSweet Potato",
+                                    "Stab\nCarrot",
+                                    "Hit\nPomelo",
+                                    "Hit\nSweet Potato",
+                                    "Stab\nCarrot",
+                                    "Stab\nCarrot",
+                                    "Stab\nCarrot",
+                                    "Hit\nPomelo",
+                                    "Hit\nSweet Potato"
+                                    ]
+    @Published var currIndex = 0
     
     func highPepper(){
         highGratePepper = .cyan
@@ -90,6 +111,7 @@ class ViewModel: ObservableObject {
         
     }
     func highCarrot(){
+        print("in c")
         highGratePepper = fontColor
         highHitPomelo = fontColor
         highStabCarrot = .cyan

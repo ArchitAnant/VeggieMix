@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  SingleItem.swift
 //  
 //
 //  Created by Archit Anant on 16/01/24.
@@ -12,7 +12,6 @@ struct SingleItem : View{
     var onclick:()->Void
     
     @State var buttonPressed = false
-//    @State var buttonColor = BaseColor
     
     
     var body:some View{
